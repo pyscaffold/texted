@@ -33,6 +33,7 @@ testing = [
 
 [tool.setuptools_scm]
 version_scheme = "no-guess-dev"
+write_to = "src/texted/_version.py"
 
 [tool.pytest.ini_options]
 addopts = """
