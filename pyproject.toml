@@ -29,6 +29,7 @@ testing = [
     "setuptools",
     "pytest",
     "pytest-cov",
+    "pytest-checkdocs",
 ]
 
 [tool.setuptools_scm]
