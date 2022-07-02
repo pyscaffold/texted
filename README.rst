@@ -60,8 +60,37 @@ After doing that you will be able to use ``texted`` in your Python scripts.
 Quickstart
 ==========
 
-When using the ``texted`` DSL there are 2 kinds of operations you can do with text:
-a select operation (``SelectOp``) and an edit operation (``EditOp``).
+Using ``texted`` involves the following workflow:
+
+1. Select the relevant lines of a given text.
+2. Perform an edition operation over the selection.
+
+This is workflow is shown in the example bellow::
+
+    >>> from texted import edit, find, until, contains, startswith, blank, remove_prefix
+    >>> example = """\
+    ... # [testenv:typecheck]
+    ... # deps = mypy
+    ... # commands = python -m mypy {posargs:src}
+    ... [testenv:docs]
+    ... deps = sphinx
+    ... changedir = docs
+    ... commands = python -m sphinx -W --keep-going . {toxinidir}/build/html
+    ... """
+    >>> new_text = edit(
+    ...    example,
+    ...    find(contains("[testenv:typecheck]")) >> until(startswith("[testenv") | blank),
+    ...    remove_prefix("# "),
+    ... )
+    >>> print(new_text)
+    [testenv:typecheck]
+    deps = mypy
+    commands = python -m mypy {posargs:src}
+    [testenv:docs]
+    deps = sphinx
+    changedir = docs
+    commands = python -m sphinx -W --keep-going . {toxinidir}/build/html
+
 
 One of the most basic kinds of select operations can be created with ``find``.
 This operation will select the first line that matches a criteria. For example::
@@ -84,30 +113,6 @@ will add the ``# `` to all the non empty lines in the selection.
 
 Note that all these functions are lazy and don't do anything until they are
 called with ``edit``::
-
-    >>> from texted import find, whilist, add_prefix, contains
-    >>> example = '''
-    ... # [testenv:typecheck]
-    ... # deps = mypy
-    ... # commands = python -m mypy {posargs:src}
-    ... [testenv:docs]
-    ... deps = sphinx
-    ... changedir = docs
-    ... commands = python -m sphinx -W --keep-going . {toxinidir}/build/html
-    ... '''
-    >>> new_text = edit(
-    ...    example,
-    ...    find(contains("[testenv:typecheck]")) >> until(startswith("[testenv") | empty)
-    ...    remove_prefix("# "),
-    ... )
-    >>> print(new_text)
-    [testenv:typecheck]
-    deps = mypy
-    commands = python -m mypy {posargs:src}
-    [testenv:docs]
-    deps = sphinx
-    changedir = docs
-    commands = python -m sphinx -W --keep-going . {toxinidir}/build/html
 
 .. note:: This library supports only `\\n` line endings.
 
@@ -135,5 +140,5 @@ Don't forget to tell your contributors to also install and use pre-commit.
 Note
 ====
 
-This project has been set up using PyScaffold 4.1.5.post1.dev5+gf3137b1. For details and usage
+This project has been set up using PyScaffold 4.1.5. For details and usage
 information on PyScaffold see https://pyscaffold.org/.

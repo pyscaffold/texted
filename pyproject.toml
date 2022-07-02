@@ -13,6 +13,7 @@ classifiers = [
     "Programming Language :: Python",
 ]
 dependencies = ['importlib-metadata; python_version<"3.8"']
+requires-python = ">=3.7"
 dynamic = ["version"]
 
 [project.urls]
@@ -29,7 +30,6 @@ testing = [
     "setuptools",
     "pytest",
     "pytest-cov",
-    "pytest-checkdocs",
 ]
 
 [tool.setuptools_scm]
@@ -41,10 +41,12 @@ addopts = """
 --cov texted --cov-report term-missing
 --verbose
 --doctest-modules
+--doctest-glob=*.rst
+--ignore-glob=docs/*.py
 """
 norecursedirs = [
     "dist",
     "build",
     ".tox",
+    ".venv",
 ]
-testpaths = ["src", "tests"]

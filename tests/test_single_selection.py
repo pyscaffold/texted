@@ -18,11 +18,6 @@ def apply_selection(text, *select):
     lines = cleandoc(text).splitlines()
     all_lines = slice(len(lines))  # we start with all the lines selected
     selected = reduce(lambda new_select, x: x(lines, new_select), select, all_lines)
-    print(f"{selected=}")
-    print("\n--->")
-    for i in range(selected.start, selected.stop, selected.step or len(lines)):
-        print(f"line {i:2d}: {lines[i]!r}")
-    print("<---\n")
     return "\n".join(lines[selected])
 
 

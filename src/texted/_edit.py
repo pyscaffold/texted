@@ -7,39 +7,31 @@ from ._single_selection import Selection, everything
 if TYPE_CHECKING:
     from typing_extensions import TypeAlias  # import from stdlib once Python >= 3.10
 
-    Edit: TypeAlias = Callable[[List[str], slice], List[str]]
-    Change: TypeAlias = Callable[[str], str]
+    Edition: TypeAlias = Callable[[List[str], slice], List[str]]
 else:
-    Edit = "Edit"
-    Change = "Change"
+    Edition = "Edition"
 
 
-def replace(fn: Change) -> Edit:
+def replace(fn: Callable[[str], str]) -> Edition:
     """Replace a chunk of text.
     The provided function will be called with the selected text as argument
     and its return value will be used as replacement.
     """
-    return cast(Edit, partial(_replace, fn))
+    return cast(Edition, partial(_replace, fn))
 
 
-def _replace(fn: Change, lines: List[str], select: slice) -> List[str]:
+def _replace(fn: Callable[[str], str], lines: List[str], select: slice) -> List[str]:
     selected_lines = lines[select]
     if len(selected_lines) < 1:
         return lines
 
-    print(f"{select=} {selected_lines}")
     replacement = _splitlines(fn("\n".join(selected_lines)))
     start = select.start or 0
     stop = select.stop or len(lines)
-    print(f"{start=} {lines[:start]=}")
-    print(f"{replacement=}")
-    print(f"{stop=} {lines[stop:]=}")
-    res_ = lines[:start] + replacement + lines[stop:]
-    print(f"{res_=}")
-    return res_
+    return lines[:start] + replacement + lines[stop:]
 
 
-def add_prefix(prefix: str, skip: Union[Predicate, None] = blank) -> Edit:
+def add_prefix(prefix: str, skip: Union[Predicate, None] = blank) -> Edition:
     """Add a fixed prefix string to every line in the selection for which the
     ``skip`` function does not evaluate to ``True``.
     When no ``skip`` function is provided, blank lines are skipped.
@@ -48,7 +40,7 @@ def add_prefix(prefix: str, skip: Union[Predicate, None] = blank) -> Edit:
     return replace(lambda text: _indent(text, prefix, pred))
 
 
-def remove_prefix(prefix, skip: Union[Predicate, None] = blank) -> Edit:
+def remove_prefix(prefix, skip: Union[Predicate, None] = blank) -> Edition:
     """Remove a fixed prefix string to every line in the selection for which the
     ``skip`` function does not evaluate to ``True``.
     Please note that if the line does not start with the prefix, it is skipped.
@@ -76,24 +68,24 @@ def _splitlines(text: str):
 
 
 @overload
-def edit(text: str, change: Edit) -> str:
+def edit(text: str, edition: Edition) -> str:
     ...
 
 
 @overload
-def edit(text: str, select: Selection, change: Edit) -> str:
+def edit(text: str, select: Selection, edition: Edition) -> str:
     ...
 
 
-def edit(text, select, change=None):
+def edit(text, select, edition=None):
     """Apply the operations to a text. You can stack a series of select operations,
     but only one edit operation is allowed.
     """
-    if change is None:
-        change = select
+    if edition is None:
+        edition = select
         select = everything
 
     lines = text.splitlines()
     all_text = slice(len(lines))
     new_select = select(lines, all_text)
-    return "\n".join(change(lines, new_select))
+    return "\n".join(edition(lines, new_select))

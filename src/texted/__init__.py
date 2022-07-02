@@ -1,4 +1,4 @@
-from ._edit import Edit, add_prefix, edit, remove_prefix, replace
+from ._edit import Edition, add_prefix, edit, remove_prefix, replace
 from ._predicate import (
     Predicate,
     blank,
@@ -36,7 +36,7 @@ __all__ = [
     "until",
     "whilist",
     # _edit
-    "Edit",
+    "Edition",
     "add_prefix",
     "edit",
     "remove_prefix",
