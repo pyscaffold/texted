@@ -13,7 +13,13 @@ from ._predicate import (
     startswith,
 )
 from ._single_selection import Selection, everything, find, until, whilist
-from ._version import __version__
+
+try:
+    from ._version import __version__
+except ImportError:
+    # version should be automatically derived from setuptools-scm upon
+    # build/editable installation.
+    __version__ = "undefined"
 
 __all__ = [
     "__version__",
