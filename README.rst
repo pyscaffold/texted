@@ -65,7 +65,7 @@ Using ``texted`` involves the following workflow:
 1. Select the relevant lines of a given text.
 2. Perform an edition operation over the selection.
 
-This is workflow is shown in the example bellow::
+This is workflow is shown in the example below::
 
     >>> from texted import edit, find, until, contains, startswith, blank, remove_prefix
     >>> example = """\
@@ -140,5 +140,5 @@ Don't forget to tell your contributors to also install and use pre-commit.
 Note
 ====
 
-This project has been set up using PyScaffold 4.1.5. For details and usage
+This project has been set up using PyScaffold 4.4. For details and usage
 information on PyScaffold see https://pyscaffold.org/.
