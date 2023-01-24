@@ -56,6 +56,7 @@ def negate(fn: Predicate) -> _Predicate:
 
 def startswith(prefix: str) -> _Predicate:
     """See :obj:`str.startswith`.
+
     >>> predicate = startswith("hello")
     >>> predicate("hello world")
     True
@@ -70,6 +71,7 @@ def startswith(prefix: str) -> _Predicate:
 
 def endswith(suffix: str) -> _Predicate:
     """See :obj:`str.endswith`.
+
     >>> predicate = endswith("hello")
     >>> predicate("hello world")
     False
@@ -82,6 +84,7 @@ def endswith(suffix: str) -> _Predicate:
 
 def contains(part: str) -> _Predicate:
     """See :obj:`str.__contains__`.
+
     >>> predicate = contains("world")
     >>> predicate("hi, hello world!")
     True
@@ -93,6 +96,7 @@ def contains(part: str) -> _Predicate:
 
 def search(pattern: str, flags: int = 0) -> _Predicate:
     """See :obj:`re.search`.
+
     >>> predicate = search("w.*", re.I)
     >>> predicate("hi, hello WORLD!")
     True
@@ -105,6 +109,7 @@ def search(pattern: str, flags: int = 0) -> _Predicate:
 
 def match(pattern: str, flags: int = 0) -> _Predicate:
     """See :obj:`re.match`.
+
     >>> predicate = match("he.*", re.I)
     >>> predicate("hi, hello world!")
     False
@@ -117,6 +122,7 @@ def match(pattern: str, flags: int = 0) -> _Predicate:
 
 def fullmatch(pattern: str, flags: int = 0) -> _Predicate:
     """See :obj:`re.fullmatch`.
+
     >>> predicate = fullmatch("hello .*", re.I)
     >>> predicate("hi, hello world!")
     False
@@ -129,6 +135,7 @@ def fullmatch(pattern: str, flags: int = 0) -> _Predicate:
 
 def glob(pattern: str, flags: int = 0) -> _Predicate:
     """See :obj:`fnmatch.translate`.
+
     >>> predicate = fullmatch("hello .*", re.I)
     >>> predicate = glob("he*")
     >>> predicate("hi, hello world!")
@@ -141,6 +148,7 @@ def glob(pattern: str, flags: int = 0) -> _Predicate:
 
 blank = ~pred(str.strip)
 """Similar to ``str.strip >> negate(bool)``
+
 >>> blank("hi")
 False
 >>> blank("    ")

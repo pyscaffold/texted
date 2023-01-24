@@ -98,7 +98,7 @@ This operation will select the first line that matches a criteria. For example::
     find(lambda line: "[testenv:typecheck]" in line)
 
 will select the first line of a text that contains the ``"[testenv:typecheck]"`` string.
-We can then *extend* this selection for all the contiguous lines that are not
+We can then *extend* (``>>``) this selection for all the contiguous lines that are not
 empty with::
 
     find(lambda line: "[testenv:typecheck]" in line) >> whilist(bool)
@@ -112,30 +112,9 @@ For example::
 will add the ``# `` to all the non empty lines in the selection.
 
 Note that all these functions are lazy and don't do anything until they are
-called with ``edit``::
+called with ``edit``.
 
-.. note:: This library supports only `\\n` line endings.
-
-
-.. _pyscaffold-notes:
-
-Making Changes & Contributing
-=============================
-
-This project uses `pre-commit`_, please make sure to install it before making any
-changes::
-
-    pip install pre-commit
-    cd texted
-    pre-commit install
-
-It is a good idea to update the hooks to the latest version::
-
-    pre-commit autoupdate
-
-Don't forget to tell your contributors to also install and use pre-commit.
-
-.. _pre-commit: https://pre-commit.com/
+.. note:: This library supports only ``\n`` line endings.
 
 Note
 ====
