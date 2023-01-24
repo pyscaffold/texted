@@ -2,8 +2,6 @@ from inspect import cleandoc
 
 from texted import add_prefix, blank, edit, find, remove_prefix, whilist
 
-from .test_single_selection import apply_selection
-
 example = cleandoc(
     """
     # [testenv:typecheck]
@@ -31,7 +29,6 @@ def test_add_prefix():
     assert text == cleandoc(expected)
 
     # Add prefix should skip blank lines by default
-    print(f"{apply_selection(example, find(blank) >> whilist(~blank))=}")
     text = edit(
         example,
         find(blank) >> whilist(~blank),
