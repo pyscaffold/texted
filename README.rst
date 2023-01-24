@@ -40,9 +40,14 @@ texted
 operating on independent chunks of text (for example commenting/uncommenting lines).
 
 It is not suitable for complex changes. If you need those, please consider
-using a library that is syntax-aware, like :pypi:`configupdater` for ``.ini/.cfg``
-files, :pypi:`tomlkit` for ``.toml`` and :pypi:`libCST` or :pypi:`refactor` for
-Python files.
+using a library that is syntax-aware, like configupdater_ for ``.ini/.cfg``
+files, tomlkit_ for ``.toml`` and libCST_ or refactor_ for Python files.
+
+
+.. _configupdater: https://configupdater.readthedocs.io/en/latest/
+.. _tomlkit: https://github.com/sdispater/tomlkit/blob/master/docs/quickstart.rst
+.. _libCST: https://libcst.readthedocs.io/en/latest/
+.. _refactor: https://refactor.readthedocs.io/en/latest/
 
 
 Installation
@@ -97,7 +102,7 @@ This operation will select the first line that matches a criteria. For example::
 
     find(lambda line: "[testenv:typecheck]" in line)
 
-will select the first line of a text that contains the ``"[testenv:typecheck]"`` string.
+… will select the first line of a text that contains the ``"[testenv:typecheck]"`` string.
 We can then *extend* (``>>``) this selection for all the contiguous lines that are not
 empty with::
 
@@ -109,7 +114,7 @@ For example::
 
     add_prefix("# ")  # => equivalent to: replace(lambda line: "# " + line)
 
-will add the ``# `` to all the non empty lines in the selection.
+… will add the prefix ``"# "`` to all the non empty lines in the selection.
 
 Note that all these functions are lazy and don't do anything until they are
 called with ``edit``.
