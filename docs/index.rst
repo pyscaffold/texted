@@ -4,7 +4,7 @@ texted
 
 This is the documentation of **texted**.
 
-.. note::
+..
 
     This is the main page of your project's `Sphinx`_ documentation.
     It is formatted in `reStructuredText`_. Add additional pages
@@ -22,6 +22,7 @@ This is the documentation of **texted**.
     you include documentation from docstrings. Docstrings can be written in
     `Google style`_ (recommended!), `NumPy style`_ and `classical style`_.
 
+Compact *domain specific language* (DSL) for editing blocks of plain text
 
 Contents
 ========
