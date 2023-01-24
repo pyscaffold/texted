@@ -78,8 +78,41 @@ def edit(text: str, select: Selection, edition: Edition) -> str:
 
 
 def edit(text, select, edition=None):
-    """Apply the operations to a text. You can stack a series of select operations,
+    r"""Apply the operations to a text. You can stack a series of select operations,
     but only one edit operation is allowed.
+
+    >>> from texted import edit, remove_prefix, add_prefix, find, blank, contains
+    >>> new_text = edit(
+    ...     "hello\n* world",
+    ...     remove_prefix("* "),
+    ... )
+    >>> print(new_text)
+    hello
+    world
+    >>> new_text = edit(
+    ...     "hello\n* world",
+    ...     find(blank),
+    ...     add_prefix("% "),
+    ... )  # No match, no change
+    >>> print(new_text)
+    hello
+    * world
+    >>> new_text = edit(
+    ...     "hello\n\nworld",
+    ...     add_prefix("%", skip=contains("hello")),
+    ... )
+    >>> print(new_text)
+    hello
+    %
+    %world
+    >>> new_text = edit(
+    ...     "hello\n\nworld",
+    ...     add_prefix("%", skip=None),
+    ... )
+    >>> print(new_text)
+    %hello
+    %
+    %world
     """
     if edition is None:
         edition = select

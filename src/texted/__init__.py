@@ -16,7 +16,7 @@ from ._single_selection import Selection, everything, find, until, whilist
 
 try:
     from ._version import __version__
-except ImportError:
+except ImportError:  # pragma: no cover
     # version should be automatically derived from setuptools-scm upon
     # build/editable installation.
     __version__ = "undefined"

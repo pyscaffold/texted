@@ -78,6 +78,9 @@ def endswith(suffix: str) -> _Predicate:
     >>> predicate = endswith("world")
     >>> predicate("hello world")
     True
+    >>> predicate = startswith("hello") & ~endswith("world")
+    >>> predicate("hello world")
+    False
     """
     return _Predicate(lambda line: line.endswith(suffix))
 
