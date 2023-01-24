@@ -44,7 +44,7 @@ class _SingleSelection(Selection):
     def __call__(self, lines: list[str], base: slice | None) -> slice:
         return self._op(lines, base)
 
-    def __rshift__(self, op: _Select) -> "_SingleSelection":
+    def __rshift__(self, op: _Select) -> _SingleSelection:
         other_op = op._op if isinstance(op, _SingleSelection) else op
         self_op = self._op
 
@@ -72,7 +72,7 @@ def until(pred: Predicate) -> _SingleSelection:
     r"""Extend the current selection for contiguous lines stopping just before
     the predicate function evaluates to ``True``.
 
-    >>> lines = "a\nb\nc\nd\ne\nf\ng\nh\ni\nj\nk\nl".splitlines()
+    >>> lines = "a b c d e f g h i j k l".split()
     >>> select = until(lambda line: "f" in line)
     >>> for i, line in select.enumerate(lines):
     ...     print(f"# {i} - {line}")
@@ -98,7 +98,7 @@ def whilist(pred: Predicate) -> _SingleSelection:
     r"""Extend the current selection for contiguous lines while the predicate
     function evaluates to ``True``.
 
-    >>> lines = "a\nb\nc\nd\ne\nf\ng\nh\ni\nj\nk\nl".splitlines()
+    >>> lines = "a b c d e f g h i j k l".split()
     >>> select = whilist(lambda line: ord(line) < ord("f"))
     >>> for i, line in select.enumerate(lines):
     ...     print(f"# {i} - {line}")
@@ -109,7 +109,7 @@ def whilist(pred: Predicate) -> _SingleSelection:
     # 4 - e
     >>> select = (
     ...     find(lambda line: "c" in line) >>         # select the first line
-    ...     whilist(lambda l: ord(l) <= ord("d")) >>  # add continious lines
+    ...     whilist(lambda l: ord(l) <= ord("d")) >>  # add continuous lines
     ...     whilist(lambda l: ord(l) > ord("f"))      # no continuous lines to add ...
     ... )
     >>> for i, line in select.enumerate(lines):
