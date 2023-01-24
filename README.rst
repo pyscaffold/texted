@@ -1,18 +1,6 @@
 .. These are examples of badges you might want to add to your README:
    please update the URLs accordingly
 
-    .. image:: https://api.cirrus-ci.com/github/<USER>/texted.svg?branch=main
-        :alt: Built Status
-        :target: https://cirrus-ci.com/github/<USER>/texted
-    .. image:: https://readthedocs.org/projects/texted/badge/?version=latest
-        :alt: ReadTheDocs
-        :target: https://texted.readthedocs.io/en/stable/
-    .. image:: https://img.shields.io/coveralls/github/<USER>/texted/main.svg
-        :alt: Coveralls
-        :target: https://coveralls.io/r/<USER>/texted
-    .. image:: https://img.shields.io/pypi/v/texted.svg
-        :alt: PyPI-Server
-        :target: https://pypi.org/project/texted/
     .. image:: https://img.shields.io/conda/vn/conda-forge/texted.svg
         :alt: Conda-Forge
         :target: https://anaconda.org/conda-forge/texted
@@ -23,6 +11,18 @@
         :alt: Twitter
         :target: https://twitter.com/texted
 
+.. image:: https://api.cirrus-ci.com/github/pyscaffold/texted.svg?branch=main
+    :alt: Built Status
+    :target: https://cirrus-ci.com/github/pyscaffold/texted
+.. image:: https://readthedocs.org/projects/texted/badge/?version=latest
+    :alt: ReadTheDocs
+    :target: https://texted.readthedocs.io/en/stable/
+.. image:: https://img.shields.io/coveralls/github/pyscaffold/texted/main.svg
+    :alt: Coveralls
+    :target: https://coveralls.io/r/pyscaffold/texted
+.. image:: https://img.shields.io/pypi/v/texted.svg
+    :alt: PyPI-Server
+    :target: https://pypi.org/project/texted/
 .. image:: https://img.shields.io/badge/-PyScaffold-005CA0?logo=pyscaffold
     :alt: Project generated with PyScaffold
     :target: https://pyscaffold.org/
