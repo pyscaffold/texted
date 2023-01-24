@@ -90,9 +90,7 @@ check_task:
   dist_cache: {folder: dist, fingerprint_script: echo $CIRRUS_BUILD_ID}  # download
   <<: *task-template
   install_script: pip install pre-commit
-  check_script:
-    - pre-commit run --all-files --show-diff-on-failure --color always
-    # - tox -e typecheck
+  check_script: tox --installpkg dist/*.whl -e lint,typecheck
 
 linux_task:
   matrix:
