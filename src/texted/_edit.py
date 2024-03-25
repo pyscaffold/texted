@@ -68,13 +68,11 @@ def _splitlines(text: str):
 
 
 @overload
-def edit(text: str, edition: Edition) -> str:
-    ...
+def edit(text: str, edition: Edition) -> str: ...
 
 
 @overload
-def edit(text: str, select: Selection, edition: Edition) -> str:
-    ...
+def edit(text: str, select: Selection, edition: Edition) -> str: ...
 
 
 def edit(text, select, edition=None):
