@@ -19,12 +19,10 @@ T = TypeVar("T", bound="Selection")
 
 class Selection(ABC):
     @abstractmethod
-    def _select(self, lines: list[str]) -> Iterator[slice]:
-        ...
+    def _select(self, lines: list[str]) -> Iterator[slice]: ...
 
     @abstractmethod
-    def __rshift__(self: T, op: _Select) -> T:
-        ...
+    def __rshift__(self: T, op: _Select) -> T: ...
 
     def enumerate(self, lines: list[str]) -> Iterator[tuple[int, str]]:
         """Iterate over the selected lines"""
