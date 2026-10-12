@@ -2,15 +2,13 @@ from inspect import cleandoc
 
 from texted import add_prefix, blank, edit, find, remove_prefix, whilist
 
-example = cleandoc(
-    """
+example = cleandoc("""
     # [testenv:typecheck]
     # deps = mypy
 
     [testenv:docs]
     deps = sphinx
-    """
-)
+    """)
 
 
 def test_add_prefix():
