@@ -3,15 +3,13 @@ from inspect import cleandoc
 
 from texted import blank, contains, find, until, whilist
 
-example = cleandoc(
-    """
+example = cleandoc("""
     # [testenv:typecheck]
     # deps = mypy
 
     [testenv:docs]
     deps = sphinx
-    """
-)
+    """)
 
 
 def apply_selection(text, *select):
